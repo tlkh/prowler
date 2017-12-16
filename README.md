@@ -23,6 +23,8 @@
 - Check connectivity: `ping p1.local -c 1 && ping p2.local -c 1 && ping p3.local -c 1 && ping p4.local -c 1`
 - Temperature Check: `/opt/vc/bin/vcgencmd measure_temp && pssh -h workers -l pi -A -i "/opt/vc/bin/vcgencmd measure_temp" | grep temp`
 
+![Raspberry Pi Cluster](pi1.jpg) ![Raspberry Pi Cluster](pi2.jpg)
+
 ## Other random stuff:
 * https://sonar.labs.rapid7.com/
 * http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
@@ -31,4 +33,3 @@
 * https://docs.python.org/3.6/library/subprocess.html#module-subprocess
 * http://qdosmsq.dunbar-it.co.uk/blog/2013/03/linux-command-to-retrieve-hardware-serial-numbers-etc/
 * https://github.com/jeanphorn/wordlist
-
