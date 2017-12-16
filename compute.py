@@ -46,7 +46,7 @@ if __name__ == '__main__':
 
     jobs = []
     test_range = []
-    for i in range(0, 1):
+    for i in range(2, 6):
         for j in range(0, 256):
             test_range.append("172.22." + str(i) + "." + str(j))
     print("Testing " + str(len(test_range)) + " hostnames")
