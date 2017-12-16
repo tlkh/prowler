@@ -63,7 +63,7 @@ lackluster security practices in order to promote basic security practices.
 
 ![more random graphs](images/rpimonitor.jpg)
 
-## External Links
+#### External Links
 -   https://nmap.org/
 -   https://pypi.python.org/pypi/python-nmap
 -   https://docs.python.org/3.6/library/subprocess.html\#module-subprocess
@@ -71,3 +71,9 @@ lackluster security practices in order to promote basic security practices.
 -   http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
 -   https://github.com/jeanphorn/wordlist
 -   https://sonar.labs.rapid7.com/
+
+#### Contributors:
+
+- Faith See
+- Wong Chi Seng
+- Timothy Liu
