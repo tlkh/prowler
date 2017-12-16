@@ -1,10 +1,15 @@
 # Pi Vulnerability Scanner Cluster
-### Infosec Community Hackathon 2017
+### Div0 Infosec Community Hackathon 2017
+
+![Terminals and shit](terminals.png)
 
 ## Hardware
-- Raspberry Pi HAT (4 * Pi Zero W)
+- Raspberry Pi [Cluster HAT](https://clusterhat.com/) (4 * Pi Zero W)
 - Raspberry Pi 3
 - No external router needed!
+
+## Files
+- `compute.py` is the main file
 
 ## Software
 - Python 3.6
@@ -17,15 +22,12 @@
 - Check connectivity: `ping p1.local -c 1 && ping p2.local -c 1 && ping p3.local -c 1 && ping p4.local -c 1`
 - Temperature Check: `/opt/vc/bin/vcgencmd measure_temp && pssh -h workers -l pi -A -i "/opt/vc/bin/vcgencmd measure_temp" | grep temp`
 
-## Files
-- `compute.py` is the main file
-
 ## Other random stuff:
-https://sonar.labs.rapid7.com/
-http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
-https://nmap.org/
-https://pypi.python.org/pypi/python-nmap
-https://docs.python.org/3.6/library/subprocess.html#module-subprocess
-http://qdosmsq.dunbar-it.co.uk/blog/2013/03/linux-command-to-retrieve-hardware-serial-numbers-etc/
-https://github.com/jeanphorn/wordlist
+* https://sonar.labs.rapid7.com/
+* http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
+* https://nmap.org/
+* https://pypi.python.org/pypi/python-nmap
+* https://docs.python.org/3.6/library/subprocess.html#module-subprocess
+* http://qdosmsq.dunbar-it.co.uk/blog/2013/03/linux-command-to-retrieve-hardware-serial-numbers-etc/
+* https://github.com/jeanphorn/wordlist
 
