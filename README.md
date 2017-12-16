@@ -11,7 +11,7 @@ could be remotely accessed via easily guessable factory default or popular login
 credentials, our team wanted to propose a solution to inform users of their
 lackluster security practices in order to promote basic security practices.
 
-![Terminals and shit](terminals.png)
+![Terminals and shit](images/terminals.png)
 
 What did we build Prowler to do?
 --------------------------------
@@ -52,7 +52,21 @@ How did we build Prowler?
 
 -   [pssh](https://www.tecmint.com/execute-commands-on-multiple-linux-servers-using-pssh/)
 
-![web interface](monitor.png)
+-   Firebase
+
+![](images/tools logos.png)
+
+![web interface](images/monitor.png)
+
+What else could Prowler potentially do?
+---------------------------------------
+
+-   Utilize the Microsoft Bot Framework to provide users with the real-time
+    information from Firebase through channels such as Telegram and Slack
+
+![](images/future works logos.png)
+
+ 
 
 Important Snippets
 ------------------
@@ -69,16 +83,14 @@ Important Snippets
 -   Temperature Check: `/opt/vc/bin/vcgencmd measure_temp && pssh -h workers -l
     pi -A -i "/opt/vc/bin/vcgencmd measure_temp" | grep temp`
 
-![Raspberry Pi Cluster](pi1.jpg)
+![Raspberry Pi Cluster](images/pi1.jpg)
 
-![Raspberry Pi Cluster](pi2.jpg)
+![Raspberry Pi Cluster](images/pi2.jpg)
 
-Other random stuff:
--------------------
+ 
 
--   https://sonar.labs.rapid7.com/
-
--   http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
+Other research materials / resources
+------------------------------------
 
 -   https://nmap.org/
 
@@ -88,4 +100,8 @@ Other random stuff:
 
 -   http://qdosmsq.dunbar-it.co.uk/blog/2013/03/linux-command-to-retrieve-hardware-serial-numbers-etc/
 
+-   http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
+
 -   https://github.com/jeanphorn/wordlist
+
+-   https://sonar.labs.rapid7.com/
