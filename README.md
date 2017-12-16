@@ -9,10 +9,6 @@ The Mirai botnet case exploited under-secured IoT devices via easily guessable f
 
 Enterprises, NGOs and individuals can make use of such a system to catch common security lapses before a security breach occurs.
 
-### Take a Tour
-- [Cluster Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/ClusterDemo.ipynb)
-- [Single Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/SingleDemo.ipynb)
-
 ![Terminals and shit](images/terminals.png)
 
 ## What did we build Prowler to do?
@@ -21,6 +17,13 @@ Enterprises, NGOs and individuals can make use of such a system to catch common 
 -   Associate the ports with common services
 -   Test devices against a dictionary of factory default and common credentials
 -   Notify users of security lapses
+
+![Dashboard on iPad](images/ipad.png)
+
+### Take a Tour
+- [Cluster Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/ClusterDemo.ipynb)
+- [Single Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/SingleDemo.ipynb)
+- Try out the web dashboard [here](https://tlkh.github.io/prowler/app/).
 
 ## How did we build Prowler?
 ### Hardware
