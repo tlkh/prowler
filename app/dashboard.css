@@ -86,6 +86,18 @@ h1 {
   border-radius: 0;
 }
 
+.bomb {
+    font-size: 5em;
+    position: relative;
+    top: -2.75em;
+    font-weight: lighter;
+    color: aliceblue;
+}
+
+.move-up-pls {
+    margin-top: -4.5em;
+}
+
 /*
  * Dashboard
  */

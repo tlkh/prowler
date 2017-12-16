@@ -19,7 +19,7 @@ Enterprises, NGOs and individuals can make use of such a system to catch common 
 -   Scan a network (or a particular subnet) for all IP addresses associated with active devices
 -   Determine if there are any open ports on the device
 -   Associate the ports with common services
--   Possibly test devices against a dictionary of factory default and common credentials
+-   Test devices against a dictionary of factory default and common credentials
 -   Notify users of security lapses
 
 ## How did we build Prowler?

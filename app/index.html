@@ -23,10 +23,13 @@
                         <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://github.com/tlkh/infosec-community-hackathon-2017">Settings</a>
+                        <a class="nav-link" href="https://github.com/tlkh/prowler">Settings</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://tlkh.github.io/infosec-community-hackathon-2017/">Help</a>
+                        <a class="nav-link" href="https://tlkh.github.io/prowler/">Help</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://tlkh.design/">About</a>
                     </li>
                 </ul>
             </div>
@@ -59,58 +62,42 @@
                     <div class="col-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
                         <h4>SSH</h4>
-                        <div class="text-muted">Some more data</div>
+                        <p class="bomb" id="ssh-count"></p>
                     </div>
                     <div class="col-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
                         <h4>VNC</h4>
-                        <span class="text-muted">Some more data</span>
+                        <p class="bomb" id="vnc-count"></p>
                     </div>
                     <div class="col-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
                         <h4>HTTP</h4>
-                        <span class="text-muted">Some more data</span>
+                        <p class="bomb" id="telnet-count"></p>
                     </div>
                     <div class="col-6 col-sm-3 placeholder">
                         <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
                         <h4>Others</h4>
-                        <span class="text-muted">Some more data</span>
+                        <p class="bomb" id="others-count"></p>
                     </div>
                 </section>
 
-                <h2>Section title</h2>
+                <h2 class="move-up-pls">Known Devices</h2>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped" id="device-table">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
-                                <th>Header</th>
+                                <th>Hostname</th>
+                                <th>Security</th>
+                                <th>Open Protocols</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1,001</td>
-                                <td>Lorem</td>
-                                <td>ipsum</td>
-                                <td>dolor</td>
-                                <td>sit</td>
-                            </tr>
-                            <tr>
-                                <td>1,002</td>
-                                <td>amet</td>
-                                <td>consectetur</td>
-                                <td>adipiscing</td>
-                                <td>elit</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
-                
-                
-                
+
+
+
             </main>
         </div>
     </div>
