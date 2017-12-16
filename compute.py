@@ -9,8 +9,25 @@ def compute(hostname):
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
         services = []
+        status = "Unknown"
         for serv in host.services:
             services.append(str(serv.port) + "/" + str(serv.service))
+            if serv.port == 22:
+                import paramiko
+                client = paramiko.client.SSHClient()
+                client.load_system_host_keys()
+                client.set_missing_host_key_policy(paramiko.WarningPolicy)
+                uid_list=["pi","odroid","root","admin"]
+                pwd_list=["raspberry","odroid","root","admin","password"]
+                for uid in uid_list:
+                    for pwd in pwd_list:
+                        try:
+                            client.connect('172.22.0.166',username=uid,password=pwd)
+                            stdin, stdout, stderr = client.exec_command('ls -l')
+                            status = "Poor SSH Credentials"
+                        except (paramiko.ssh_exception.AuthenticationException):
+                            status = "Unknown"
+                client.close()
         import pyrebase
         config = {
             "apiKey": "AIzaSyCOhJuPsdThHoPghb3LxwVJv9WJVyRIYms",
@@ -24,7 +41,8 @@ def compute(hostname):
         db = firebase.database()  # reference to the database service
         hoststruct = hostname.split(".")
         data = {"hostname": hostname,
-                "services": services}
+                "services": services,
+                "status": status}
         results = db.child(hoststruct[0]).child(hoststruct[1]).child(
             hoststruct[2]).child(hoststruct[3]).set(data, user['idToken'])
     else:
