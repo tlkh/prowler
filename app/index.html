@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Prowler Dashboard</title>
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-colour">
+            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/tlkh/infosec-community-hackathon-2017">Settings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://tlkh.github.io/infosec-community-hackathon-2017/">Help</a>
+                    </li>
+                </ul>
+            </div>
+            <a class="navbar-brand" href="#">Prowler</a>
+        </nav>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-sidebar-colour sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Overview <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Reports</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Analytics</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Export</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+                <h1>Dashboard</h1>
+
+                <section class="row text-center placeholders">
+                    <div class="col-6 col-sm-3 placeholder">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+                        <h4>SSH</h4>
+                        <div class="text-muted">Some more data</div>
+                    </div>
+                    <div class="col-6 col-sm-3 placeholder">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+                        <h4>VNC</h4>
+                        <span class="text-muted">Some more data</span>
+                    </div>
+                    <div class="col-6 col-sm-3 placeholder">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIABAAJ12AAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+                        <h4>HTTP</h4>
+                        <span class="text-muted">Some more data</span>
+                    </div>
+                    <div class="col-6 col-sm-3 placeholder">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIABAADcgwAAACwAAAAAAQABAAACAkQBADs=" width="200" height="200" class="img-fluid rounded-circle" alt="Generic placeholder thumbnail">
+                        <h4>Others</h4>
+                        <span class="text-muted">Some more data</span>
+                    </div>
+                </section>
+
+                <h2>Section title</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Header</th>
+                                <th>Header</th>
+                                <th>Header</th>
+                                <th>Header</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1,001</td>
+                                <td>Lorem</td>
+                                <td>ipsum</td>
+                                <td>dolor</td>
+                                <td>sit</td>
+                            </tr>
+                            <tr>
+                                <td>1,002</td>
+                                <td>amet</td>
+                                <td>consectetur</td>
+                                <td>adipiscing</td>
+                                <td>elit</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                
+                
+            </main>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.0/firebase.js"></script>
+    <script src="app.js"></script>
+    <script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+    <script src="https://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+</body>
+
+</html>
