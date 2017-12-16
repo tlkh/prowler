@@ -54,7 +54,7 @@ How did we build Prowler?
 
 -   Firebase
 
-![](images/tools logos.png)
+![rpi, python, linux and firebase logos](images/tools logos.png)
 
 ![web interface](images/monitor.png)
 
@@ -66,7 +66,7 @@ What else could Prowler potentially do?
 
 ![](images/future works logos.png)
 
- 
+\~microsoft bot framework, telegram and slack logos
 
 Important Snippets
 ------------------
