@@ -10,6 +10,7 @@ def compute(hostname):
         host = parsed.hosts[0]
         services = []
         status = "Unknown"
+        cracked = False
         for serv in host.services:
             services.append(str(serv.port) + "/" + str(serv.service))
             if serv.port == 22:
@@ -22,10 +23,14 @@ def compute(hostname):
                 for uid in uid_list:
                     for pwd in pwd_list:
                         try:
-                            client.connect(hostname,username=uid,password=pwd)
-                            stdin, stdout, stderr = client.exec_command('ls -l')
-                            status = "Poor SSH Credentials"
-                        except (paramiko.ssh_exception.AuthenticationException):
+                            if cracked == False:
+                                client.connect(hostname,username=uid,password=pwd)
+                                stdin, stdout, stderr = client.exec_command('ls -l')
+                                status = "Poor SSH Credentials"
+                                print("PWNNEEDDDD!!!!")
+                                cracked = True
+                        except:
+                            print("failed to pwn")
                             status = "Unknown"
                 client.close()
         import pyrebase
@@ -64,8 +69,8 @@ if __name__ == '__main__':
 
     jobs = []
     test_range = []
-    for i in range(2, 6):
-        for j in range(0, 256):
+    for i in range(0, 1):
+        for j in range(100, 200):
             test_range.append("172.22." + str(i) + "." + str(j))
     print("Testing " + str(len(test_range)) + " hostnames")
 
