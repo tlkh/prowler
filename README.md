@@ -1,5 +1,4 @@
-# Pi Vulnerability Scanner Cluster
-### Div0 Infosec Community Hackathon 2017
+# Pi-Cluster Vulnerability Scanner
 
 ![Terminals and shit](terminals.png)
 
@@ -15,6 +14,8 @@
 - Python 3.6
 - Dispy
 - [pssh](https://www.tecmint.com/execute-commands-on-multiple-linux-servers-using-pssh/)
+
+![web interface](monitor.png)
 
 ## Important Snippets
 - To run ssh command on multiple devices `pssh -h pssh-hosts -l username -A -i "command"`
