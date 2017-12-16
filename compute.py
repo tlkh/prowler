@@ -2,9 +2,28 @@ def compute(hostname):
     import os
     response = os.system("ping -c 1 -w 1 " + hostname)
     if response == 0:
-      valid = True
+      valid = "alive"
+      #then perform port scanning
+      ports = ["20","8888"]
+      types = ["camera", "fridge"]
+      import pyrebase
+      config = {
+          "apiKey": "AIzaSyCOhJuPsdThHoPghb3LxwVJv9WJVyRIYms",
+          "authDomain": "clusterscanner.firebaseio.com",
+          "databaseURL": "https://clusterscanner.firebaseio.com/",
+          "storageBucket": "clusterscanner.appspot.com"
+        }
+      firebase = pyrebase.initialize_app(config)
+      auth = firebase.auth()
+      user = auth.sign_in_with_email_and_password("pi@cluster.pi", "asdf1234")
+      db = firebase.database() # reference to the database service
+      hoststruct = hostname.split(".")
+      data = {"hostname": hostname,
+              "ports": ports,
+              "device_type": types}
+      results = db.child(hoststruct[0]).child(hoststruct[1]).child(hoststruct[2]).child(hoststruct[3]).set(data, user['idToken'])
     else:
-      valid = False
+      valid = "dead"
     return (hostname, valid)
 
 if __name__ == '__main__':
@@ -17,9 +36,9 @@ if __name__ == '__main__':
     auto_ssh = False
 
     cluster = dispy.JobCluster(compute, nodes=workers, ip_addr='169.254.148.126')
-    jobs = []
     http_server = dispy.httpd.DispyHTTPServer(cluster)
 
+    jobs = []
     test_range = []
     for i in range (0,1):
         for j in range (0,255):
@@ -39,7 +58,7 @@ if __name__ == '__main__':
         jobs.append(job)
     # cluster.wait() # waits for all scheduled jobs to finish
 
-    if auto_ssh == True:
+    '''if auto_ssh == True:
         print("Starting nodes...")
         import paramiko
         for worker in workers:
@@ -47,14 +66,14 @@ if __name__ == '__main__':
             client = paramiko.client.SSHClient()
             client.load_system_host_keys()
             client.set_missing_host_key_policy(paramiko.WarningPolicy)
-            client.connect(str(worker),port=22, username="pi", password="asdf1234")
+            client.connect(worker,port=22, username="pi", password="asdf1234")
             stdin, stdout, stderr = client.exec_command('nohup ./start.sh')
             client.close()
-            print(str(worker) + " started.")
+            print(worker + " started.")'''
     
     for job in jobs:
         hostname, valid = job() # waits for job to finish and returns results
-        print('%s tested %s validity is %s' % (job.ip_addr, hostname, valid))
+        print(job.ip_addr+": "+hostname+" is "+valid+".")
         # other fields of 'job' that may be useful:
         # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
         
