@@ -10,7 +10,8 @@ from libnmap.parser import NmapParser, NmapParserException
 
 # start a new nmap scan on localhost with some specific options
 def do_scan(host, options):
-    host = input("Enter Target Host Address: ")
+    # uncomment line below to manually input target IP
+    #host = input("Enter Target Host Address: ")
     parsed = None
     nmproc = NmapProcess(host, options)
     rc = nmproc.run()
@@ -25,6 +26,13 @@ def do_scan(host, options):
 
     return parsed
 
+if __name__ == "__main__":
+    #change IP address below to target IP to immediately run upon execution
+    report = do_scan("172.22.0.166", "-sV")
+    if report:
+        print_scan(report)
+    else:
+        print("No results returned")
 
 # print scan results from a nmap report
 def print_scan(nmap_report):
@@ -42,7 +50,7 @@ def print_scan(nmap_report):
         print("Nmap scan report for {0} ({1})".format(
             tmp_host,
             host.address))
-        print("Host is " '\033[1m' + '{0}.'.format(host.status))
+        print("Host is {0}.".format(host.status))
         print ("-" * 60)
         print("    PORT   STATE         SERVICE")
         for serv in host.services:
@@ -56,11 +64,3 @@ def print_scan(nmap_report):
             print(pserv)
         print ("=" * 60)
     print("Summary: ", nmap_report.summary)
-
-
-if __name__ == "__main__":
-    report = do_scan("127.0.0.1", "-sV")
-    if report:
-        print_scan(report)
-    else:
-        print("No results returned")
