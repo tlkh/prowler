@@ -1,26 +1,26 @@
 # Prowler
 #### Raspberry Pi Cluster Network Vulnerability Scanner
 
-Why did we build Prowler?
--------------------------
+## Why did we build Prowler?
 
-In view of the Mirai botnet case which exploited under-secured IoT devices that
-could be remotely accessed via easily guessable factory default or popular login
-credentials, our team wanted to propose a solution to inform users of their
-lackluster security practices in order to promote basic security practices.
+*Often, security breaches are not due to hackers breaking through layers of tough security. They happen because someone didn't change their default passwords.*
+
+The Mirai botnet case exploited under-secured IoT devices via easily guessable factory default (or popular) login credentials. This incident, along with many other copycat attempts, led our team wanted to propose a solution to aid users in securing their increasingly connected world.
+
+Enterprises, NGOs and individuals can make use of such a system to catch common security lapses before a security breach occurs.
+
+### Take a Tour
+- [Cluster Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/ClusterDemo.ipynb)
+- [Single Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/SingleDemo.ipynb)
 
 ![Terminals and shit](images/terminals.png)
 
 ## What did we build Prowler to do?
--   Scan a network for all IP addresses that are up and extract these IP
-    addresses
--   Scan the ports of extracted IP addresses
--   Access our compiled standard dictionary of default / popular / common
-    usernames and passwords to check for devices that have such credentials
--   Notify users that such credentials ought to be rectified through an online
-    console
-
- 
+-   Scan a network (or a particular subnet) for all IP addresses associated with active devices
+-   Determine if there are any open ports on the device
+-   Associate the ports with common services
+-   Possibly test devices against a dictionary of factory default and common credentials
+-   Notify users of security lapses
 
 ## How did we build Prowler?
 ### Hardware
@@ -28,49 +28,38 @@ lackluster security practices in order to promote basic security practices.
 -   Raspberry Pi 3
 -   No external router needed!
 
-### Files
--   `compute.py` is the main file
+![Raspberry Pi Cluster](images/pi1.jpg)
+![Raspberry Pi Cluster](images/pi2.jpg)
 
 ### Software
 -   Python 3.6
--   Dispy
--   [pssh](https://www.tecmint.com/execute-commands-on-multiple-linux-servers-using-pssh/)
+-   [nmap](https://nmap.org/)
+-   [Dispy](http://dispy.sourceforge.net/)
 -   Firebase
+-   Bonus: [pssh](https://www.tecmint.com/execute-commands-on-multiple-linux-servers-using-pssh/)
 
 ![raspberry pi, python, linux and firebase logos](images/tools_logos.png)
 
 ![web interface](images/monitor.png)
 
 ## What else could Prowler potentially do?
--   Utilize the Microsoft Bot Framework to provide users with the real-time
-    information from Firebase through channels such as Telegram and Slack
+-   Use Microsoft Bot Framework to proactively provide users with the real-time
+    information from Firebase through channels such as Telegram, Slack and much more
 
 ![more logos](images/chat_logos.png)
 
-
-## Important Snippets
+## Useful Snippets
 -   To run ssh command on multiple devices `pssh -h pssh-hosts -l username -A -i
     "command"`
--   To create the cluster (in octopi/`compute.py`): `cluster =
+-   To create the cluster (in `compute.py`): `cluster =
     dispy.JobCluster(compute, nodes='pi0_ip', ip_addr='pi3_ip')`
 -   Check connectivity: `ping p1.local -c 1 && ping p2.local -c 1 && ping
     p3.local -c 1 && ping p4.local -c 1`
 -   Temperature Check: `/opt/vc/bin/vcgencmd measure_temp && pssh -h workers -l
     pi -A -i "/opt/vc/bin/vcgencmd measure_temp" | grep temp`
-
-![Raspberry Pi Cluster](images/pi1.jpg)
-![Raspberry Pi Cluster](images/pi2.jpg)
+-   rpimonitor:
 
 ![more random graphs](images/rpimonitor.jpg)
-
-#### External Links
--   https://nmap.org/
--   https://pypi.python.org/pypi/python-nmap
--   https://docs.python.org/3.6/library/subprocess.html\#module-subprocess
--   http://qdosmsq.dunbar-it.co.uk/blog/2013/03/linux-command-to-retrieve-hardware-serial-numbers-etc/
--   http://resources.infosecinstitute.com/popular-tools-for-brute-force-attacks/
--   https://github.com/jeanphorn/wordlist
--   https://sonar.labs.rapid7.com/
 
 #### Contributors:
 
