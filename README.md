@@ -11,10 +11,11 @@
 - Dispy
 - [pssh](https://www.tecmint.com/execute-commands-on-multiple-linux-servers-using-pssh/)
 
-## Important Code
+## Important Snippets
 - To run ssh command on multiple devices `pssh -h pssh-hosts -l username -A -i "command"`
 - To create the cluster (in octopi/`compute.py`): `cluster = dispy.JobCluster(compute, nodes='pi0_ip', ip_addr='pi3_ip')`
 - Check connectivity: `ping p1.local -c 1 && ping p2.local -c 1 && ping p3.local -c 1 && ping p4.local -c 1`
+- Temperature Check: `/opt/vc/bin/vcgencmd measure_temp && pssh -h workers -l pi -A -i "/opt/vc/bin/vcgencmd measure_temp" | grep temp`
 
 ## Files
 - `compute.py` is the main file
