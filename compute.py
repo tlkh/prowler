@@ -3,7 +3,7 @@ def compute(hostname):
     if (os.system("ping -c 1 -w 1 " + hostname)) == 0:
         valid = "alive"
         from libnmap.process import NmapProcess
-        from libnmap.parser import NmapParser, NmapParserException
+        from libnmap.parser import NmapParser
         nmproc = NmapProcess(hostname, "-sV")
         rc = nmproc.run()
         parsed = NmapParser.parse(nmproc.stdout)
@@ -22,7 +22,7 @@ def compute(hostname):
                 for uid in uid_list:
                     for pwd in pwd_list:
                         try:
-                            client.connect('172.22.0.166',username=uid,password=pwd)
+                            client.connect(hostname,username=uid,password=pwd)
                             stdin, stdout, stderr = client.exec_command('ls -l')
                             status = "Poor SSH Credentials"
                         except (paramiko.ssh_exception.AuthenticationException):
