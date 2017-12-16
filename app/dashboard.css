@@ -17,6 +17,43 @@ h1 {
   border-bottom: 1px solid #eee;
 }
 
+.bg-colour {
+    background-color: #2c1a1a;
+}
+
+.bg-sidebar-colour {
+    background-color: #523d3d;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: #695252;
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
+.sidebar .nav-link {
+    color: #a79393;
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
+.sidebar .nav-link:hover {
+    color: #ead0d0;
+}
+
+.navbar-brand {
+    margin: auto;
+    position: absolute;
+    left:45vw;
+    text-transform: uppercase;
+    font-weight: bolder;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    transition-property: all;
+    transition-duration: 0.2s;
+}
+
 /*
  * Sidebar
  */
