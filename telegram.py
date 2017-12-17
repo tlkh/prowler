@@ -22,10 +22,10 @@ def stream_handler(message):
             print(e)
             print("no subscribers")
 
-TOKEN = "481182040:AAGlCUIhopxqkwzrsZerdHM5Fz6v2vXcrlQ"
+TOKEN = ""
 
 config = {
-    "apiKey": "AIzaSyCOhJuPsdThHoPghb3LxwVJv9WJVyRIYms",
+    "apiKey": "",
     "authDomain": "clusterscanner.firebaseio.com",
     "databaseURL": "https://clusterscanner.firebaseio.com",
     "storageBucket": "clusterscanner.appspot.com"

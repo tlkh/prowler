@@ -35,14 +35,14 @@ def compute(hostname):
                 client.close()
         import pyrebase
         config = {
-            "apiKey": "AIzaSyCOhJuPsdThHoPghb3LxwVJv9WJVyRIYms",
+            "apiKey": "",
             "authDomain": "clusterscanner.firebaseio.com",
             "databaseURL": "https://clusterscanner.firebaseio.com/",
             "storageBucket": "clusterscanner.appspot.com"
         }
         firebase = pyrebase.initialize_app(config)
         auth = firebase.auth()
-        user = auth.sign_in_with_email_and_password("pi@cluster.pi", "asdf1234")
+        user = auth.sign_in_with_email_and_password("pi@cluster.pi", "")
         db = firebase.database()  # reference to the database service
         hoststruct = hostname.split(".")
         data = {"hostname": hostname,
