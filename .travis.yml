@@ -3,5 +3,5 @@ python:
   - "2.7"
   - "3.5"
   - "3.6"
-install: "pip install pyrebase paramiko nose pylint opencv-contrib-python"
+install: "pip install telepot pyrebase nose pylint"
 script: "nosetests && pylint -E *.py"
