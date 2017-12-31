@@ -69,3 +69,5 @@ Enterprises, NGOs and individuals can make use of such a system to catch common 
 - Faith See
 - Wong Chi Seng
 - Timothy Liu
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
