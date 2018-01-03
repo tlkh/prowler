@@ -9,8 +9,6 @@ Raspberry Pi Cluster Network Vulnerability Scanner, developed during Singapore I
 -   Test devices against a dictionary of factory default and common credentials
 -   Notify users of security lapses through an online dashboard
 
-![Dashboard on iPad](images/ipad.png)
-
 ### Demos
 - [Cluster Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/ClusterDemo.ipynb)
 - [Single Scan Demonstration Jupyter Notebook](http://nbviewer.jupyter.org/github/tlkh/prowler/blob/master/SingleDemo.ipynb)
@@ -20,9 +18,6 @@ Raspberry Pi Cluster Network Vulnerability Scanner, developed during Singapore I
 -   Raspberry Pi [Cluster HAT](https://clusterhat.com/) (with 4 \* Pi Zero W)
 -   Raspberry Pi 3
 -   No external router needed!
-
-![Raspberry Pi Cluster](images/pi1.jpg)
-![Raspberry Pi Cluster](images/pi2.jpg)
 
 ### Software Stack
 
