@@ -3,6 +3,9 @@
 .AppleDouble
 .LSOverride
 
+#Jupyter
+.ipynb_checkpoints
+
 # Icon must end with two \r
 Icon
 
