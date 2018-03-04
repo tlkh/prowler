@@ -2,4 +2,4 @@ dispy
 pssh
 paramiko
 python-libnmap
-scapy
+scapy-python3
