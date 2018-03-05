@@ -4,3 +4,5 @@ paramiko
 python-libnmap
 scapy-python3
 ansible
+jupyter
+psutil

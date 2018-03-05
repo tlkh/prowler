@@ -8,7 +8,7 @@ root juantech
 root 123456
 root 54321
 support support
-root
+root rooted
 admin password
 root root
 root 12345
@@ -35,6 +35,7 @@ administrator 1234
 ubnt ubnt
 root klv1234
 root Zte521
+pi asdf
 root hi3518
 root jvbzd
 root anko
@@ -57,4 +58,3 @@ admin pass
 admin meinsm
 tech tech
 mother fucker
-

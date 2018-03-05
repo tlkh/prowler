@@ -28,17 +28,13 @@ def compute(hostname):
                 for i in empty:
                     if bool(i)==True:
                         splitted.append(i)
-                empty=[]
-                for i in splitted:
-                    for j in i:
-                        empty.append(j)
                 uid_list=[]
                 pwd_list=[]
-                for i in range(len(empty)):
+                for i in range(len(splitted)):
                     if i==0 or i%2==0:
-                        uid_list.append(empty[i])
+                        uid_list.append(splitted[i])
                     else:
-                        pwd_list.append(empty[i])
+                        pwd_list.append(splitted[i])
                 for uid in uid_list:
                     for pwd in pwd_list:
                         try:

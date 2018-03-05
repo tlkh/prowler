@@ -3,22 +3,12 @@
   hosts: pi-cluster
   gather_facts: no
   tasks:
-    - name: 'Reboot all nodes'
-      shell: shutdown -r now
-      async: 0
-      poll: 0
+    - name: Reboot all nodes
+      shell: sleep 5 && shutdown -r now
       ignore_errors: true
       become: true
 
-    - pause: seconds=10
-
-    # Now we will run a local 'ansible -m ping' on this host until it returns.
-    # This works with the existing ansible hosts inventory and so any custom ansible_ssh_hosts definitions are being used
-    - local_action: shell ansible all -m ping
-      register: result
-      until: result.rc == 0
-      retries: 30
-      delay: 10
-
-    # And finally, execute 'uptime' when the host is back.
-    - shell: uptime
+    - name: Wait for server to come back
+      local_action: wait_for host = {{ ansible_default_ipv4.address }} port=22 state=started delay=30 timeout=300 state=started
+      become: false
+      ignore_errors: true
