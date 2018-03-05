@@ -15,21 +15,13 @@
       - python3-pip
       - python3-numpy
       - nmap
-  - name: Upgrade pip
+  - name: Configure pip and setuptools
     pip:
-      name: pip
-      extra_args: --upgrade
-  - name: Upgrade setuptools
-    pip:
-      name: setuptools
-      extra_args: --upgrade
-  - name: Upgrade wheel
-    pip:
-      name: wheel
+      requirements: files/pip-upgrade.txt
       extra_args: --upgrade
   - name: Configure Python packages
     pip:
       requirements: ../requirements.txt
 
-- include: upgrade.yml
 - include: wifi_testnet.yml
+- include: upgrade.yml
