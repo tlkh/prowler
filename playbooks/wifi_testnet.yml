@@ -3,4 +3,6 @@
 - tasks:
   - name: copy wpa_supplicant file (TestingNet)
     become: yes
-    copy: src=files/wpa_testnet.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf mode=0600
+    template:
+      src=: files/wpa_testnet.conf
+      dest: /etc/wpa_supplicant/wpa_supplicant.conf

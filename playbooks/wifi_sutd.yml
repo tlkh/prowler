@@ -3,4 +3,6 @@
 - tasks:
   - name: copy wpa_supplicant file (SUTD_Student)
     become: yes
-    copy: src=files/wpa_sutd.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf mode=0600
+    template:
+      src=: files/wpa_sutd.conf
+      dest: /etc/wpa_supplicant/wpa_supplicant.conf

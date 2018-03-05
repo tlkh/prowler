@@ -1,4 +1,5 @@
 ---
+- import_playbook: wifi_sutd.yml
 - name: Playbook for setting up a new worker node
   hosts: pi-cluster
   tasks:
@@ -7,15 +8,21 @@
     become: yes
     notify:
       - reboot
-  - name: Install python3-dev packages
+  - name: Install system packages
+    apt:
+      name: psutil
+      state: present
+      with_items:
+      - htop
+      - nmap
+  - name: Install python3 packages
     apt:
       name: python3-dev
       state: present
       with_items:
       - python3-pip
       - python3-numpy
-      - nmap
-  - name: Configure pip and setuptools
+  - name: Upgrade pip and setuptools
     pip:
       requirements: files/pip-upgrade.txt
       extra_args: --upgrade
@@ -23,5 +30,6 @@
     pip:
       requirements: ../requirements.txt
 
-- include: wifi_testnet.yml
-- include: upgrade.yml
+- import_playbook: wifi_testnet.yml
+- import_playbook: upgrade.yml
+- import_playbook: reboot.yml
