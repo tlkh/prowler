@@ -1,0 +1,23 @@
+---
+- name: Playbook for managing the upgrades in RPi Cluster
+  hosts: pi-cluster
+  tasks:
+    - name: Update apt package cache
+      become: yes
+      apt:
+        update_cache=yes
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400
+    - name: 'Reboot RPi'
+      shell: shutdown -r now
+      async: 0
+      poll: 0
+      ignore_errors: true
+      become: true
+    - name: "Wait for reboot to complete"
+      local_action: wait_for host={{ ansible_host }} port=22 state=started delay=10
+      become: false

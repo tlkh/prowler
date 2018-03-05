@@ -1,0 +1,15 @@
+---
+- name: Playbook for shutting down the RPis
+  hosts: pi-cluster
+  gather_facts: no
+  tasks:
+    - name: 'Shutdown RPi'
+      shell: shutdown -h now
+      async: 0
+      poll: 0
+      ignore_errors: true
+      become: true
+
+    - name: "Wait for shutdown to complete"
+      local_action: wait_for host={{ ansible_host }} port=22 state=stopped
+      become: false

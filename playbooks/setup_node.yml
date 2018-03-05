@@ -1,0 +1,35 @@
+---
+- name: Playbook for setting up a new worker node
+  hosts: pi-cluster
+  tasks:
+  - name: Expand filesystem to fill disk
+    command: raspi-config --expand-rootfs
+    become: yes
+    notify:
+      - reboot
+  - name: Install python3-dev packages
+    apt:
+      name: python3-dev
+      state: present
+      with_items:
+      - python3-pip
+      - python3-numpy
+      - nmap
+  - name: Upgrade pip
+    pip:
+      name: pip
+      extra_args: --upgrade
+  - name: Upgrade setuptools
+    pip:
+      name: setuptools
+      extra_args: --upgrade
+  - name: Upgrade wheel
+    pip:
+      name: wheel
+      extra_args: --upgrade
+  - name: Configure Python packages
+    pip:
+      requirements: ../requirements.txt
+
+- include: upgrade.yml
+- include: wifi_testnet.yml

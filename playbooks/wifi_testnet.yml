@@ -1,0 +1,6 @@
+---
+# Set up WiFi from a template
+# You still have to fill in credentials in the template
+- name: update wpa_supplicant file (SUTD_Student)
+  become: yes
+  template: src=files/wpa_testnet.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
