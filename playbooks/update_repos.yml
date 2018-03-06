@@ -1,0 +1,14 @@
+---
+- name: Clone Repositories
+  hosts: pi-cluster
+  tasks:
+  - name: cd to dispy
+    command: cd /home/pi/dispy
+  - name: perform git pull dispy
+    become: no
+    command: git pull
+  - name: cd to prowler
+    command: cd ../prowler
+  - name: perform git clone prowler
+    become: no
+    command: git pull
