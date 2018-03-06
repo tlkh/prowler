@@ -5,5 +5,5 @@
   - name: copy wpa_supplicant file (TestingNet)
     become: yes
     template:
-      src=: files/wpa_testnet.conf
+      src: files/wpa_testnet.conf
       dest: /etc/wpa_supplicant/wpa_supplicant.conf

@@ -7,17 +7,6 @@
     command: ifconfig wlan0 down
   - pause:
       seconds: 5
-  - name: Copy script to disable eth0 gateway
-    become: no
-    template:
-      src: files/disable_eth0_gateway.sh
-      dest: ~/disable_eth0_gateway.sh
-  - name: Enabling execution
-    command: chmod +x disable_eth0_gateway.sh
-    become: no
-  - name: Disable gateway (eth0)
-    command: ./disable_eth0_gateway.sh
-    become: no
   - name: Copy wpa_supplicant file (SUTD_Student)
     become: yes
     template:
