@@ -1,13 +1,9 @@
 ---
-- import_playbook: wifi_testnet.yml
-- import_playbook: rpi3_isolate.yml
-- import_playbook: toggle_wifi.yml
-
 - name: Playbook for initialising the nodes
   hosts: pi-cluster
   gather_facts: yes
   tasks:
     - name: Initialise node
-      shell: python3 /home/pi/dispy/py3/dispy/dispynode.py &
+      shell: /home/pi/prowler/start.sh
       ignore_errors: false
       become: true

@@ -1,0 +1,10 @@
+---
+- name: Clone Repositories
+  hosts: pi-cluster
+  tasks:
+  - name: perform git clone dispy
+    become: no
+    command: git clone https://github.com/pgiri/dispy.git
+  - name: perform git clone prowler
+    become: no
+    command: git clone https://github.com/tlkh/prowler.git

@@ -1,0 +1,10 @@
+---
+- name: Clone Repositories
+  hosts: pi-cluster
+  tasks:
+  - name: remove dispy
+    become: no
+    command: rm -R dispy
+  - name: remove prowler
+    become: no
+    command: rm -R prowler

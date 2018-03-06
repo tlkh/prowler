@@ -13,7 +13,6 @@ admin password
 root root
 root 12345
 user user
-admin
 root pass
 admin admin1234
 root 1111
