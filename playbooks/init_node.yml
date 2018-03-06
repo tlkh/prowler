@@ -4,6 +4,6 @@
   gather_facts: yes
   tasks:
     - name: Initialise node
-      shell: /home/pi/prowler/start.sh &
+      shell: "(/home/pi/prowler/start.sh &)"
       ignore_errors: false
       become: true

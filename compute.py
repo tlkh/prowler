@@ -1,7 +1,7 @@
 def compute(hostname):
+    valid = "alive"
     import os
     if (os.system("ping -c 1 -w 1 " + hostname)) == 0:
-        valid = "alive"
         from libnmap.process import NmapProcess
         from libnmap.parser import NmapParser
         nmproc = NmapProcess(hostname, "-sV")
@@ -42,6 +42,7 @@ def compute(hostname):
                 client.close() 
     else:
         valid = "dead"
+    print(hostname,valid)
     return (hostname, valid)
 
 if __name__ == '__main__':

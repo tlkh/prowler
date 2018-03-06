@@ -1,10 +1,10 @@
 ---
-- name: Clone Repositories
+- name: Delete Repositories
   hosts: pi-cluster
   tasks:
   - name: remove dispy
-    become: no
-    command: rm -R dispy
+    become: yes
+    command: rm -R /home/pi/dispy
   - name: remove prowler
-    become: no
-    command: rm -R prowler
+    become: yes
+    command: rm -R /home/pi/prowler
