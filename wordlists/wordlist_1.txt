@@ -35,7 +35,6 @@ administrator 1234
 ubnt ubnt
 root klv1234
 root Zte521
-pi asdf
 root hi3518
 root jvbzd
 root anko
@@ -58,3 +57,4 @@ admin pass
 admin meinsm
 tech tech
 mother fucker
+pi asdf1234

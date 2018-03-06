@@ -1,5 +1,7 @@
 ---
 - import_playbook: wifi_sutd.yml
+- import_playbook: rpi3_internet.yml
+- import_playbook: reboot.yml
 
 - name: Playbook for setting up a new worker node
   hosts: pi-cluster
@@ -9,42 +11,40 @@
     become: yes
   - name: Install system packages
     become: yes
-    apt: name=htop state=present
-  - apt: name=nmap state=present
+    apt: name={{item}} state=installed
+    with_items:
+      - nmap
+      - htop
+      - git
+  - name: Install python3 packages
     become: yes
-  - apt: name=git state=present
-    become: yes
-  - name: Install python3-dev
-    become: yes
-    apt:
-      name: python3-dev
-      state: present
-  - name: Install python3-pip
-    become: yes
-    apt:
-      name: python3-pip
-      state: present
-  - name: Install python3-numpy
-    become: yes
-    apt:
-      name: python3-numpy
-      state: present
+    apt: name={{item}} state=installed
+    with_items:
+      - python3-dev
+      - python3-pip
+      - python3-numpy
+      - python-dev
+      - python-pip
+  - name: Delete old files (tlkh/prowler)
+    command: rm -r prowler
   - name: Clone tlkh/prowler
     command: git clone https://github.com/tlkh/prowler.git
   - name: Upgrade pip and setuptools
     become: yes
     pip:
-      requirements: ~/prowler/playbooks/files/pip-upgrade.txt
+      requirements: /home/pi/prowler/playbooks/files/pip-upgrade.txt
       extra_args: --upgrade
       executable: pip3
   - name: Configure Python packages
     become: yes
     pip:
       executable: pip3
-      requirements: ~/prowler/requirements.txt
+      requirements: /home/pi/prowler/requirements.txt
 
 - import_playbook: wifi_testnet.yml
 
 - import_playbook: upgrade.yml
+
+- import_playbook: rpi3_isolate.yml
 
 - import_playbook: reboot.yml

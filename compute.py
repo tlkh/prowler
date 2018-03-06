@@ -14,7 +14,6 @@ def compute(hostname):
         for serv in host.services:
             services.append(str(serv.port) + "/" + str(serv.service))
             if serv.port == 22:
-                print('hi')
                 import paramiko
                 client = paramiko.client.SSHClient()
                 client.load_system_host_keys()
@@ -39,18 +38,17 @@ def compute(hostname):
                         uid_list.append(empty[i])
                     else:
                         pwd_list.append(empty[i])
-                for uid in uid_list:
-                    for pwd in pwd_list:
-                        try:
-                            if cracked == False:
-                                client.connect(hostname,username=uid,password=pwd)
-                                stdin, stdout, stderr = client.exec_command('ls -l')
-                                status = "Poor SSH Credentials"
-                                print("PWNNEEDDDD!!!!")
-                                cracked = True
-                        except:
-                            print("failed to pwn")
-                            status = "Unknown"
+                for (uid,pwd) in zip(uid_list,pwd_list):
+                    try:
+                        if cracked == False:
+                            client.connect(hostname,username=uid,password=pwd)
+                            stdin, stdout, stderr = client.exec_command('ls -l')
+                            status = "Poor SSH Credentials"
+                            print("PWNNEEDDDD!!!!")
+                            cracked = True
+                    except:
+                        print("failed to pwn")
+                        status = "Unknown"
                 client.close() 
 compute('192.168.0.133')
 '''
