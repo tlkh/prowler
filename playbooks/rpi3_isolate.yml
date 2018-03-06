@@ -10,6 +10,9 @@
     template:
       src: files/wpa_testnet.conf
       dest: /etc/wpa_supplicant/wpa_supplicant.conf
+  - name: Unblocking Wi-FI
+    become: yes
+    command: rfkill unblock 0
   - name: Enable Wi-Fi
     become: yes
     command: ifconfig wlan0 up
