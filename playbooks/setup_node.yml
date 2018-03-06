@@ -25,10 +25,6 @@
       - python3-numpy
       - python-dev
       - python-pip
-  - name: Delete old files (tlkh/prowler)
-    command: rm -r prowler
-  - name: Clone tlkh/prowler
-    command: git clone https://github.com/tlkh/prowler.git
   - name: Upgrade pip and setuptools
     become: yes
     pip:
