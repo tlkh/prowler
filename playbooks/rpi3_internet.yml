@@ -1,0 +1,21 @@
+---
+- name: pi3-nodes - Enable Internet
+  hosts: pi3-nodes
+  tasks:
+  - name: Disable Wi-Fi
+    become: yes
+    command: ifconfig wlan0 down
+  - pause:
+      seconds: 5
+  - name: Copy wpa_supplicant file (SUTD_Student)
+    become: yes
+    template:
+      src: files/wpa_sutd.conf
+      dest: /etc/wpa_supplicant/wpa_supplicant.conf
+  - name: Unblocking Wi-FI
+    become: yes
+    command: rfkill unblock 0
+  - name: Enable Wi-Fi
+    become: yes
+    command: ifconfig wlan0 up
+ 

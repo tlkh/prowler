@@ -1,0 +1,16 @@
+---
+- name: Toggle Wi-Fi for nodes
+  hosts: pi-cluster
+  gather_facts: yes
+  tasks:
+    - name: Turning Wi-Fi off
+      shell: ifconfig wlan0 down
+      ignore_errors: false
+      become: yes
+    - name: Unblocking Wi-FI
+      command: rfkill unblock 0
+      become: yes
+    - name: Turning Wi-Fi on
+      shell: ifconfig wlan0 up
+      ignore_errors: false
+      become: yes

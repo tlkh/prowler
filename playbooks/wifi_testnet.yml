@@ -1,6 +1,9 @@
 ---
-# Set up WiFi from a template
-# You still have to fill in credentials in the template
-- name: update wpa_supplicant file (SUTD_Student)
-  become: yes
-  template: src=files/wpa_testnet.conf dest=/etc/wpa_supplicant/wpa_supplicant.conf
+- name: Connect node to TestingNet
+  hosts: pi-cluster 
+  tasks:
+  - name: copy wpa_supplicant file (TestingNet)
+    become: yes
+    template:
+      src: files/wpa_testnet.conf
+      dest: /etc/wpa_supplicant/wpa_supplicant.conf

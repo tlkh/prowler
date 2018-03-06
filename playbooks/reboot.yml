@@ -3,13 +3,16 @@
   hosts: pi-cluster
   gather_facts: no
   tasks:
-    - name: 'Reboot RPi'
-      shell: shutdown -r now
-      async: 0
+    - name: Reboot system
+      shell: sleep 2 && shutdown -r now "Ansible triggered reboot"
+      async: 1
       poll: 0
       ignore_errors: true
       become: true
 
-    - name: "Wait for reboot to complete"
-      local_action: wait_for host={{ ansible_host }} port=22 state=started delay=10
+    - name: Wait for system to boot up
+      local_action: wait_for host={{ ansible_host }} port={{ ansible_port }} state=started delay=15 timeout=300
       become: false
+
+    - debug:
+        msg: "We're back again. Running on {{ ansible_hostname }}"

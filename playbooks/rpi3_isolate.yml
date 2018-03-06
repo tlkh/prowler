@@ -1,0 +1,21 @@
+---
+- name: Disable connection to external network
+  hosts: pi3-nodes
+  tasks:
+  - name: Disable Wi-Fi
+    become: yes
+    command: ifconfig wlan0 down
+  - name: Copy wpa_supplicant file (TestingNet)
+    become: yes
+    template:
+      src: files/wpa_testnet.conf
+      dest: /etc/wpa_supplicant/wpa_supplicant.conf
+  - name: Unblocking Wi-FI
+    become: yes
+    command: rfkill unblock 0
+  - name: Enable Wi-Fi
+    become: yes
+    command: ifconfig wlan0 up
+  - name: Enable eth0
+    become: yes
+    command: ifconfig eth0 up

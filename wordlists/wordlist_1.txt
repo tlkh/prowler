@@ -8,7 +8,7 @@ root juantech
 root 123456
 root 54321
 support support
-root
+root rooted
 admin password
 root root
 root 12345
@@ -57,4 +57,4 @@ admin pass
 admin meinsm
 tech tech
 mother fucker
-
+pi asdf1234
