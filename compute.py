@@ -37,8 +37,8 @@ def compute(hostname):
                             credentials = [uid, pwd]
                         else: break
                     except:
-                        print("failed to pwn")
                         status = "Unknown"
+                print("failed to pwn")                
                 client.close() 
     else:
         valid = "dead"
