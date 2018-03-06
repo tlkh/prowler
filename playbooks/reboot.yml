@@ -15,4 +15,4 @@
       become: false
 
     - debug:
-        msg: "We're back again. Running on {{ inventory_hostname }}"
+        msg: "We're back again. Running on {{ ansible_hostname }}"
