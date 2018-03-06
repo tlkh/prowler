@@ -1,6 +1,7 @@
 root vizxv
 root admin
 admin admin
+pi asdf1234
 root 888888
 root xmhdipc
 root default
@@ -56,4 +57,3 @@ admin pass
 admin meinsm
 tech tech
 mother fucker
-pi asdf1234
