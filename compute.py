@@ -7,8 +7,11 @@ def compute(hostname):
         print("Host", hostname, "is alive, starting nmap")
         from libnmap.process import NmapProcess
         from libnmap.parser import NmapParser
-        nmproc = NmapProcess(hostname, "-sV")
+        nmproc = NmapProcess(hostname, "-O")
         rc = nmproc.run()
+        while nmproc.is_running():
+            print("Nmap Scan running: DONE: {1}%".format(nmap_proc.progress)) #displays percentage progress when running
+            sleep(2)
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
         services = []
@@ -88,7 +91,8 @@ if __name__ == '__main__':
         try:
             result = job()
             hostname, valid, breached, credentials = result  # waits for job to finish and returns results
-            print(job.ip_addr + ": " + hostname + " is " + valid + ". Breached:", breached, "with credentials", credentials)
+            print(job.ip_addr + ": " + hostname + " is " + valid + ". Breached:", breached, "with credentials", credentials) 
+            print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
             # other fields of 'job' that may be useful:
             # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
         except Exception as e:
