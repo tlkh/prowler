@@ -7,11 +7,12 @@ def compute(hostname):
         print("Host", hostname, "is alive, starting nmap")
         from libnmap.process import NmapProcess
         from libnmap.parser import NmapParser
-        nmproc = NmapProcess(hostname, "-O")
-        rc = nmproc.run()
-        while nmproc.is_running():
-            print("Nmap Scan running: DONE: {1}%".format(nmap_proc.progress)) #displays percentage progress when running
-            sleep(2)
+        from libnmap.objects.os import NmapOSClass
+        from time import sleep
+        nmproc = NmapProcess(targets=hostname, options="-A")
+        rc=nmproc.run()
+        for 'osclass' in nmproc.stdout:            #i am tired, will work on it later today
+            print('OS class: {0}%'.format(NmapOSClass['osfamily']))
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
         services = []
@@ -20,6 +21,7 @@ def compute(hostname):
             services.append(str(serv.port) + "/" + str(serv.service))
             print("Open ports:", services)
             if serv.port == 22:
+                print("------starting credentials test------")
                 import paramiko, time
                 client = paramiko.client.SSHClient()
                 client.load_system_host_keys()
@@ -53,7 +55,8 @@ def compute(hostname):
     else:
         valid = "offline"
     return hostname, valid, cracked, credentials
-
+compute('192.168.0.133')
+'''
 if __name__ == '__main__':
     import dispy
     import logging
@@ -105,3 +108,4 @@ if __name__ == '__main__':
     cluster.close()
 
     print("\n","Total time taken =", str(end - start))
+'''
