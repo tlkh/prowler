@@ -20,9 +20,9 @@ class ResultsStream:
         print("[i][Pika] Configured connections")
 
     def start(self):
-		# start the thread to read frames from the video stream
-		Thread(target=self.update, args=()).start()
-		return self
+        # start the thread to read frames from the video stream
+        Thread(target=self.update, args=()).start()
+        return self
 
     def update(self):
         print("[+][Pika] Watching channel (blocking!)")

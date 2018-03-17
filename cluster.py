@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     print("[i][dispy] Initialising Cluster")
 
-    workers = ['192.168.0.133','192.168.0.110','169.254.102.163','169.254.116.199','169.254.114.226','169.254.156.34']
+    workers = ['192.168.0.133','192.168.0.110','192.168.0.170','192.168.0.111','192.168.0.153','192.168.0.195']
 
     cluster = dispy.JobCluster(compute, nodes=workers, ip_addr='192.168.0.142')
     http_server = dispy.httpd.DispyHTTPServer(cluster)
@@ -103,7 +103,7 @@ if __name__ == '__main__':
         try:
             result = job()
             hostname, valid, breached, credentials, os_matches = result  # waits for job to finish and returns results
-            result_security = str(hostname) + " is " + str(valid) + ". Breached: " str(breached) + " with credentials " + str(credentials)
+            result_security = str(hostname) + " is " + str(valid) + ". Breached: " + str(breached) + " with credentials " + str(credentials)
             print(job.ip_addr,":",result_security)
             print(os_matches)
             message = (result_security, os_matches)
