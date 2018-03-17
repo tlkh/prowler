@@ -4,28 +4,24 @@ def compute(hostname):
     cracked = False
     credentials = None
     if (os.system("ping -c 1 -w 1 " + hostname)) == 0:
-        print("Host", hostname, "is alive, starting nmap")
+        print("Host", hostname, "is online, starting nmap")
         from libnmap.process import NmapProcess
         from libnmap.parser import NmapParser
         from libnmap.objects.os import NmapOSClass
-        from time import sleep
         nmproc = NmapProcess(targets=hostname, options="-sV")
         rc=nmproc.run()
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
-        '''
-        If host.is_up():
+        if host.is_up():
             print("{0} {1}".format(host.address, " ".join(host.hostnames)))
             if host.os_fingerprinted:
                 print("OS Fingerprint:")
-                msg = ''
                 for osm in host.os.osmatches:
                     print("Found Match:{0} ({1}%)".format(osm.name, osm.accuracy))
                     for osc in osm.osclasses:
                         print("\tOS Class: {0}".format(osc.description))
             else:
-                print("No fingerprint available")
-        '''
+                fingerprint = "None"
         services = []
         status = "Unknown"
         for serv in host.services:
@@ -65,9 +61,8 @@ def compute(hostname):
                         print("Failed to pwn, error:", e)
     else:
         valid = "offline"
-    return hostname, valid, cracked, credentials
-compute('192.168.0.117')
-'''
+    return hostname, valid, cracked, credentials, host.os.osmatches
+
 if __name__ == '__main__':
     import dispy
     import logging
@@ -104,9 +99,10 @@ if __name__ == '__main__':
     for job in jobs:
         try:
             result = job()
-            hostname, valid, breached, credentials = result  # waits for job to finish and returns results
-            print(job.ip_addr + ": " + hostname + " is " + valid + ". Breached:", breached, "with credentials", credentials) 
-            print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
+            hostname, valid, breached, credentials, os_matches = result  # waits for job to finish and returns results
+            print(job.ip_addr + ": " + hostname + " is " + valid + ". Breached:", breached, "with credentials", credentials)
+            print(os_matches)
+            #print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
             # other fields of 'job' that may be useful:
             # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
         except Exception as e:
@@ -114,9 +110,7 @@ if __name__ == '__main__':
             print("debug:", job.stdout, job.stderr, job.exception)
 
     end = time.time()
+    print("\n","Total time taken =", str(end - start))
     cluster.print_status()
     http_server.shutdown()
     cluster.close()
-
-    print("\n","Total time taken =", str(end - start))
-'''

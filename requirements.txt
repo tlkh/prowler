@@ -6,3 +6,4 @@ scapy-python3
 ansible
 jupyter
 psutil
+pika
