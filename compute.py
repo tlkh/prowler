@@ -9,12 +9,23 @@ def compute(hostname):
         from libnmap.parser import NmapParser
         from libnmap.objects.os import NmapOSClass
         from time import sleep
-        nmproc = NmapProcess(targets=hostname, options="-A")
+        nmproc = NmapProcess(targets=hostname, options="-sV")
         rc=nmproc.run()
-        for 'osclass' in nmproc.stdout:            #i am tired, will work on it later today
-            print('OS class: {0}%'.format(NmapOSClass['osfamily']))
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
+        '''
+        If host.is_up():
+            print("{0} {1}".format(host.address, " ".join(host.hostnames)))
+            if host.os_fingerprinted:
+                print("OS Fingerprint:")
+                msg = ''
+                for osm in host.os.osmatches:
+                    print("Found Match:{0} ({1}%)".format(osm.name, osm.accuracy))
+                    for osc in osm.osclasses:
+                        print("\tOS Class: {0}".format(osc.description))
+            else:
+                print("No fingerprint available")
+        '''
         services = []
         status = "Unknown"
         for serv in host.services:
@@ -55,7 +66,7 @@ def compute(hostname):
     else:
         valid = "offline"
     return hostname, valid, cracked, credentials
-compute('192.168.0.133')
+compute('192.168.0.117')
 '''
 if __name__ == '__main__':
     import dispy
