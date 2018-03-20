@@ -1,6 +1,7 @@
 # Prowler
-**Prowler** is a Network Vulnerability Scanner implemented on a Raspberry Pi Cluster, first developed during Singapore Infosec Community Hackathon - HackSmith v1.0.[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Black Hat Aresenal 2018](https://raw.githubusercontent.com/tlkh/badges/master/arsenal/2018.svg)](https://www.blackhat.com/asia-18/arsenal/schedule/#prowler---cluster-network-scanner-9901)
+**Prowler** is a Network Vulnerability Scanner implemented on a Raspberry Pi Cluster, first developed during Singapore Infosec Community Hackathon - HackSmith v1.0.
+
+[![Black Hat Aresenal 2018](images/2018.svg)](https://www.blackhat.com/asia-18/arsenal/schedule/#prowler---cluster-network-scanner-9901) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ![dashboard](images/screenshot_dashboard.jpg)
 
@@ -11,11 +12,12 @@
 -   Determine if there are any open ports on the device
 -   Associate the ports with common services
 -   Test devices against a dictionary of factory default and common credentials
--   Notify users of security vulnerabilities through an online dashboard
+-   Notify users of security vulnerabilities through an [dashboard](https://github.com/tlkh/prowler-dashboard). [Dashboard tour](https://www.youtube.com/watch?v=ycgxt-BvVz0)
 
 ### Planned Capabilities
 
 - Greater variety of vulnerability assessment capabilities (webapp etc.)
+- Select wordlist based on fingerprint
 
 ### Hardware
 -   Raspberry Pi [Cluster HAT](https://clusterhat.com/) (with 4 \* Pi Zero W)
@@ -39,6 +41,7 @@ Key Python Packages:
 - `python-libnmap` is the python wrapper around [nmap](https://nmap.org/), an open source network scanner. It allows us to scan for open ports on devices.
 - `paramiko` is a python wrapper around SSH. We use it to probe SSH on devices to test for common credentials.
 - `eel` is used for the web dashboard (seperate repository, [here](https://github.com/tlkh/prowler-dashboard))
+- `rabbitmq` ([website](https://www.rabbitmq.com/)) is used to pass the results from the cluster to the `eel` server that is serving the dashboard page. 
 
 ### Ansible Playbooks
 
@@ -56,12 +59,10 @@ For the playbooks to work, `ansible` must be installed (`sudo pip3 install ansib
 2. Install dependencies by running `sudo pip3 install -r requirements.txt` on the controller Pi
 3. Run `ansible-playbook playbooks/setup_node.yml` to install the required packages on worker nodes.
 4. Clone the prowler and dispy repositories to the worker nodes using `ansible-playbook playbooks/clone_repos.yml`
+5. Run `clusterhat on` on the controller Pi to ensure that all Pi Zeros are powered up.
+6. Run `python3 cluster.py` on the controller Pi to start Prowler
 
-
-1. Run `clusterhat on` on the controller Pi to ensure that all Pi Zeros are powered up.
-2. Run `python3 cluster.py` on the controller Pi to start Prowler
-
-To edit the range of IP addresses being scanned, edit the following lines in `compute.py`:
+To edit the range of IP addresses being scanned, edit the following lines in `cluster.py`:
 ```
 test_range = []
 
@@ -95,4 +96,4 @@ test_range = []
 - Wong Chi Seng
 - Timothy Liu
 
-**ABSOLUTELY NO WARRANTY WHATSOEVER!**
+**ABSOLUTELY NO WARRANTY WHATSOEVER!** Feel free to submit issues though.
