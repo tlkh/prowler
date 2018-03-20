@@ -109,4 +109,4 @@ test_range = []
 
 **ABSOLUTELY NO WARRANTY WHATSOEVER!** Feel free to submit issues though.
 
-![logos](tools_logos.png)
+![logos](images/tools_logos.png)
