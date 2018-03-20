@@ -1,5 +1,6 @@
 # Prowler
-**Prowler** is a Network Vulnerability Scanner implemented on a Raspberry Pi Cluster, first developed during Singapore Infosec Community Hackathon - HackSmith v1.0.
+**Prowler** is a Network Vulnerability Scanner implemented on a Raspberry Pi Cluster, first developed during Singapore Infosec Community Hackathon - HackSmith v1.0.[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Black Hat Aresenal 2018](https://raw.githubusercontent.com/tlkh/badges/master/arsenal/2018.svg)](https://www.blackhat.com/asia-18/arsenal/schedule/#prowler---cluster-network-scanner-9901)
 
 ![dashboard](images/screenshot_dashboard.jpg)
 
@@ -95,5 +96,3 @@ test_range = []
 - Timothy Liu
 
 **ABSOLUTELY NO WARRANTY WHATSOEVER!**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
