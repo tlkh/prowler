@@ -7,3 +7,4 @@ ansible
 jupyter
 psutil
 pika
+eel

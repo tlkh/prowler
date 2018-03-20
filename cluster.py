@@ -3,22 +3,27 @@ def compute(hostname):
     valid = "online"
     breached = False
     credentials = None
+    fingerprint = None
+    services = None
+    os_match = None
     if (os.system("ping -c 1 -w 1 " + hostname)) == 0:
         print("Host", hostname, "is online, starting nmap")
         from libnmap.process import NmapProcess
         from libnmap.parser import NmapParser
         from libnmap.objects.os import NmapOSClass
-        nmproc = NmapProcess(targets=hostname, options="-sV")
+        nmproc = NmapProcess(targets=hostname, options="-O")
         rc=nmproc.run()
         parsed = NmapParser.parse(nmproc.stdout)
         host = parsed.hosts[0]
         #print("{0} {1}".format(host.address, " ".join(host.hostnames)))
+        os_match = []
         if host.os_fingerprinted:
             fingerprint = host.os.osmatches
             print("OS Fingerprint:")
             for osm in host.os.osmatches:
                 print("Found Match:{0} ({1}%)".format(osm.name, osm.accuracy))
                 for osc in osm.osclasses:
+                    os_match.append(str(osc.description))
                     print("\tOS Class: {0}".format(osc.description))
         else:
             fingerprint = None
@@ -60,7 +65,7 @@ def compute(hostname):
                         print("Failed to pwn, error:", e)
     else:
         valid = "offline"
-    return hostname, fingerprint, services, breached
+    return hostname, os_match, services, breached, valid
 
 if __name__ == '__main__':
     import dispy, time, pika
@@ -69,7 +74,9 @@ if __name__ == '__main__':
 
     print("[i][dispy] Initialising Cluster")
 
-    workers = ['192.168.0.133','192.168.0.110','169.254.102.163','169.254.116.199','169.254.114.226','169.254.156.34']
+    #workers = ['192.168.0.133','192.168.0.110'
+    workers = ['192.168.0.170','192.168.0.111',
+               '192.168.0.153','192.168.0.195']
 
     cluster = dispy.JobCluster(compute, nodes=workers, ip_addr='192.168.0.142')
     http_server = dispy.httpd.DispyHTTPServer(cluster)
@@ -101,19 +108,37 @@ if __name__ == '__main__':
     for job in jobs:
         try:
             result = job()
-            hostname, fingerprint, services, breached = result  # waits for job to finish and returns results
+            hostname, fingerprint, services, breached, valid = result  # waits for job to finish and returns results
             #result_security = str(hostname) + " is " + str(valid) + ". Breached: " str(breached) + " with credentials " + str(credentials)
             #print(job.ip_addr,":",result_security)
             #print(os_matches)
-            message = [hostname, fingerprint, services, breached]
-            print(message)
-            try:
-                channel.basic_publish(exchange='scan_results_exchange', routing_key='scan_results', body=str(message))
-            except Exception as e:
-                print("[!] Message failed to send:", str(e))
-            # print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
-            # other fields of 'job' that may be useful:
-            # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
+            if valid == "online":
+                message = [hostname, fingerprint, services, breached]
+                print(message)
+                try:
+                    channel.basic_publish(exchange='scan_results_exchange', routing_key='scan_results', body=str(message))
+                    print("Message published")
+                except Exception as e:
+                    print("[!] Message failed to publish:", str(e))
+                    try:
+                        print("Refreshing connection")
+                        try:
+                            connection.close()
+                        except Exception as e:
+                            print(e)
+                            pass
+                        connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+                        channel = connection.channel()
+                        channel.queue_declare(queue='scan_results')
+                    except Exception as e:
+                        print("Error restarting connection", str(e))
+                    channel.basic_publish(exchange='scan_results_exchange', routing_key='scan_results', body=str(message))
+                    print("Message published successfully (second time)")
+                # print('OS Description : {0}'.format(osclass['osfamily']) for osclass in nmap.Portscanner[job.ip_addr]['osclass'])
+                # other fields of 'job' that may be useful:
+                # print(job.stdout, job.stderr, job.exception, job.ip_addr, job.start_time, job.end_time)
+            else:
+                print(hostname, "is offline")
         except Exception as e:
             print("[!]",str(job),"failed with error:",str(e))
             print("[+] Debug:", job.stdout, job.stderr, job.exception)
