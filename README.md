@@ -64,6 +64,8 @@ For the playbooks to work, `ansible` must be installed (`sudo pip3 install ansib
 - `clone_repos.yml` clone prowler and dispy repositories (required!) on the worker nodes
 - `setup_node.yml` installs all required packages on the worker nodes. Does not clone the repositories!
 
+![logos](images/tools_logos.png)
+
 ## Deploying Prowler
 
 1. Clone the git repository: `git clone https://github.com/tlkh/prowler.git`
@@ -108,5 +110,3 @@ test_range = []
 - Timothy Liu
 
 **ABSOLUTELY NO WARRANTY WHATSOEVER!** Feel free to submit issues though.
-
-![logos](images/tools_logos.png)
