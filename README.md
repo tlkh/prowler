@@ -8,7 +8,7 @@
 ### Capabilities
 
 -   Scan a network (a particular subnet or a list of IP addresses) for all IP addresses associated with active network devices
--   Determine the type of devicing using fingerprinting
+-   Determine the type of devices using fingerprinting
 -   Determine if there are any open ports on the device
 -   Associate the ports with common services
 -   Test devices against a dictionary of factory default and common credentials
